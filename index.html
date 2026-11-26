@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>donutstash.site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #c21f1f;
+      --red-deep: #5c0a0c;
+      --black: #050001;
+      --ink: #fff1ee;
+      --accent: #ff6a55;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Fira Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(28px, 6vh, 64px);
+      padding: 24px 16px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 0%, rgba(230, 50, 40, 0.55) 0%, transparent 70%),
+        linear-gradient(to bottom, var(--red) 0%, var(--red-deep) 45%, var(--black) 100%);
+      background-attachment: fixed;
+    }
+
+    /* Giant faint donut ring behind the content */
+    .ring {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      width: min(92vmin, 820px);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, transparent 0 30%, rgba(255, 90, 70, 0.10) 31% 62%, transparent 63%);
+      border: 1px solid rgba(255, 120, 100, 0.10);
+      box-shadow: 0 0 120px rgba(220, 40, 30, 0.18), inset 0 0 80px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
+
+    /* Soft vignette */
+    body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+      pointer-events: none;
+    }
+
+    h1, main { position: relative; z-index: 1; }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 104px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      text-align: center;
+      overflow-wrap: anywhere;
+      background: linear-gradient(to bottom, #ffffff 10%, #ffb3a6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 6px 28px rgba(0, 0, 0, 0.55));
+      animation: rise 0.8s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .shop-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 2.4vw, 32px);
+      height: clamp(72px, 8vw, 112px);
+      padding: 0 clamp(32px, 4vw, 64px);
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: clamp(26px, 3vw, 44px);
+      font-weight: 700;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 150, 130, 0.35);
+      box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.45),
+        0 0 0 6px rgba(255, 90, 70, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      animation: rise 0.8s 0.15s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .shop-pill:hover {
+      transform: translateY(-3px) scale(1.03);
+      background: linear-gradient(to bottom, rgba(255, 110, 90, 0.5), rgba(200, 40, 35, 0.35));
+      border-color: rgba(255, 190, 175, 0.7);
+      box-shadow:
+        0 16px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 8px rgba(255, 90, 70, 0.14),
+        0 0 50px rgba(255, 80, 60, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    }
+
+    .shop-pill:active { transform: translateY(0) scale(0.99); }
+
+    .shop-pill:focus-visible {
+      outline: 3px solid #ffd0c7;
+      outline-offset: 6px;
+    }
+
+    .shop-pill svg {
+      width: clamp(30px, 3.6vw, 52px);
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1, .shop-pill { animation: none; }
+      .shop-pill, .shop-pill:hover { transition: none; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ring" aria-hidden="true"></div>
+
+  <h1>donutstash.site</h1>
+
+  <main>
+    <a class="shop-pill" href="https://mcstash.com/?ref=TTZACHARYVR" rel="noopener">
+      <svg viewBox="0 0 68 74" fill="none" aria-hidden="true">
+        <path d="M22 22c0-8 5-13 12-13s12 5 12 13" stroke="#ffd0c7" stroke-width="4" stroke-linecap="round"/>
+        <path d="M5 22h58l-2 48H7L5 22z" fill="#ff8a76"/>
+        <path d="M14 58c8-8 32-8 40 0v8H14v-8z" fill="#a52a22" fill-opacity="0.6"/>
+      </svg>
+      <span>Shop</span>
+    </a>
+  </main>
+
+</body>
+</html>
